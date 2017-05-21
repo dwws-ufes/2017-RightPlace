@@ -43,7 +43,7 @@ public class UserJPADAO extends BaseJPADAO<User> implements UserDAO {
 	/** @see br.ufes.inf.nemo.rightplace.core.persistence.UserDAO#retrieveByEmail(java.lang.String) */
 	@Override
 	public User retrieveByEmail(String email) throws PersistentObjectNotFoundException, MultiplePersistentObjectsFoundException {
-		logger.log(Level.FINE, "Retrieving the academic whose e-mail is \"{0}\"...", email);
+		logger.log(Level.FINE, "Retrieving the user whose e-mail is \"{0}\"...", email);
 
 		// Constructs the query over the User class.
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -53,7 +53,7 @@ public class UserJPADAO extends BaseJPADAO<User> implements UserDAO {
 		// Filters the query with the email.
 		cq.where(cb.equal(root.get(User_.email), email));
 		User result = executeSingleResultQuery(cq, email);
-		logger.log(Level.INFO, "Retrieve academic by the email \"{0}\" returned \"{1}\"", new Object[] { email, result });
+		logger.log(Level.INFO, "Retrieve user by the email \"{0}\" returned \"{1}\"", new Object[] { email, result });
 		return result;
 	}
 }

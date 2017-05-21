@@ -9,16 +9,17 @@ import br.ufes.inf.nemo.jbutler.ejb.application.filters.LikeFilter;
 import br.ufes.inf.nemo.jbutler.ejb.controller.CrudController;
 import br.ufes.inf.nemo.rightplace.core.application.ManageUserService;
 import br.ufes.inf.nemo.rightplace.core.domain.User;
+
 @Named
 @SessionScoped
 public class ManageUserController extends CrudController<User> {
 
-	/**
+/**
 	 * 
 	 */
-	private static final long serialVersionUID = 9108488003212241540L;
-	@EJB private ManageUserService manageUserService;
-	
+	private static final long serialVersionUID = 1L;
+	@EJB private  ManageUserService manageUserService;
+
 	@Override
 	protected CrudService<User> getCrudService() {
 		// TODO Auto-generated method stub

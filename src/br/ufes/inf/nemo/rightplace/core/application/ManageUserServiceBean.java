@@ -18,7 +18,10 @@ public class ManageUserServiceBean extends CrudServiceBean<br.ufes.inf.nemo.righ
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 9005060068010933657L;
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	
 	@EJB private UserDAO userDAO;
 
@@ -29,11 +32,11 @@ public class ManageUserServiceBean extends CrudServiceBean<br.ufes.inf.nemo.righ
 	};
 	@Override
 	protected User validate(User newEntity, User oldEntity) {
-		// New academics must have their creation date set.
+		// New users must have their creation date set.
 		Date now = new Date(System.currentTimeMillis());
 		if (oldEntity == null) newEntity.setCreationDate(now);
 
-		// All academics have their last update date set when persisted.
+		// All users have their last update date set when persisted.
 		newEntity.setLastUpdateDate(now);
 
 		return newEntity;

@@ -31,7 +31,7 @@ public class InstallSystemServiceBean implements InstallSystemService {
 
 	/** The DAO for User objects. */
 	@EJB
-	private UserDAO academicDAO;
+	private UserDAO userDAO;
 
 	/** The DAO for RightplaceConfiguration objects. */
 	@EJB
@@ -62,7 +62,7 @@ public class InstallSystemServiceBean implements InstallSystemService {
 
 			// Saves the administrator.
 			logger.log(Level.FINER, "Persisting admin data...\n\t- Short name = {0}\n\t- Last update date = {1}", new Object[] { admin.getShortName(), admin.getLastUpdateDate() });
-			academicDAO.save(admin);
+			userDAO.save(admin);
 			logger.log(Level.FINE, "The administrator has been saved: {0} ({1})", new Object[] { admin.getName(), admin.getEmail() });
 
 			// Saves Rightplace's configuration.

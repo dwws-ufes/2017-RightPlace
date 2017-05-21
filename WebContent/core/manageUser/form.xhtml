@@ -60,6 +60,7 @@
 					<p:hotkey bind="#{msgs['jbutler.crud.hotkey.backToList']}" action="#{manageUserController.list}" immediate="true" />
 				</ui:decorate>
 			</h:panelGroup>
+			
 			<h:panelGroup rendered="#{manageUserController.readOnly}">
 				<ui:decorate template="/resources/#{coreInfo.decorator}/formbuttonpanel-01.xhtml">
 					<p:commandButton id="backButton" action="#{manageUserController.list}" value="#{msgs['jbutler.crud.button.back']}" immediate="true" icon="fa fa-fw fa-arrow-circle-left" />

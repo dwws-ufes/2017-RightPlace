@@ -46,7 +46,7 @@ public class User extends Person {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Telephone> telephones;
 
-	/** The timestamp of the moment this academic was created. */
+	/** The timestamp of the moment this user was created. */
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationDate;
 

@@ -35,7 +35,7 @@ public class SessionInformationBean implements SessionInformation {
 
 	/** The DAO for User objects. */
 	@EJB
-	private UserDAO academicDAO;
+	private UserDAO userDAO;
 
 	/** The current user logged in. */
 	private User currentUser;
@@ -52,7 +52,7 @@ public class SessionInformationBean implements SessionInformation {
 		try {
 			// Obtains the user given the e-mail address (that serves as username).
 			logger.log(Level.FINER, "Authenticating user with username \"{0}\"...", username);
-			User user = academicDAO.retrieveByEmail(username);
+			User user = userDAO.retrieveByEmail(username);
 
 			// Creates the MD5 hash of the password for comparison.
 			String md5pwd = TextUtils.produceMd5Hash(password);
@@ -69,9 +69,9 @@ public class SessionInformationBean implements SessionInformation {
 
 				// Registers the user login.
 				Date now = new Date(System.currentTimeMillis());
-				logger.log(Level.FINER, "Setting last login date for academic with username \"{0}\" as \"{1}\"...", new Object[] { currentUser.getEmail(), now });
+				logger.log(Level.FINER, "Setting last login date for user with username \"{0}\" as \"{1}\"...", new Object[] { currentUser.getEmail(), now });
 				currentUser.setLastLoginDate(now);
-				academicDAO.save(currentUser);
+				userDAO.save(currentUser);
 			}
 			else {
 				// Passwords don't match.
@@ -80,13 +80,13 @@ public class SessionInformationBean implements SessionInformation {
 			}
 		}
 		catch (PersistentObjectNotFoundException e) {
-			// No academic was found with the given username.
-			logger.log(Level.INFO, "User \"{0}\" not logged in: no registered academic found with given username.", username);
+			// No user was found with the given username.
+			logger.log(Level.INFO, "User \"{0}\" not logged in: no registered user found with given username.", username);
 			throw new LoginFailedException(e, LoginFailedException.LoginFailedReason.UNKNOWN_USERNAME);
 		}
 		catch (MultiplePersistentObjectsFoundException e) {
-			// Multiple academics were found with the same username.
-			logger.log(Level.WARNING, "User \"{0}\" not logged in: there are more than one registered academic with the given username.", username);
+			// Multiple users were found with the same username.
+			logger.log(Level.WARNING, "User \"{0}\" not logged in: there are more than one registered user with the given username.", username);
 			throw new LoginFailedException(e, LoginFailedException.LoginFailedReason.MULTIPLE_USERS);
 		}
 		catch (EJBTransactionRolledbackException e) {
