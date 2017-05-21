@@ -5,7 +5,7 @@ import javax.ejb.Local;
 import br.ufes.inf.nemo.jbutler.ejb.persistence.BaseDAO;
 import br.ufes.inf.nemo.jbutler.ejb.persistence.exceptions.MultiplePersistentObjectsFoundException;
 import br.ufes.inf.nemo.jbutler.ejb.persistence.exceptions.PersistentObjectNotFoundException;
-import br.ufes.inf.nemo.rightplace.core.domain.Academic;
+import br.ufes.inf.nemo.rightplace.core.domain.User;
 
 /**
  * TODO: document this type.
@@ -14,7 +14,7 @@ import br.ufes.inf.nemo.rightplace.core.domain.Academic;
  * @version 1.0
  */
 @Local
-public interface AcademicDAO extends BaseDAO<Academic> {
+public interface UserDAO extends BaseDAO<User> {
 	/**
 	 * TODO: document this method.
 	 * 
@@ -23,5 +23,5 @@ public interface AcademicDAO extends BaseDAO<Academic> {
 	 * @throws PersistentObjectNotFoundException
 	 * @throws MultiplePersistentObjectsFoundException
 	 */
-	Academic retrieveByEmail(String email) throws PersistentObjectNotFoundException, MultiplePersistentObjectsFoundException;
+	User retrieveByEmail(String email) throws PersistentObjectNotFoundException, MultiplePersistentObjectsFoundException;
 }

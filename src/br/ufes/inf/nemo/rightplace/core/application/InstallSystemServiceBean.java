@@ -9,10 +9,10 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import br.ufes.inf.nemo.jbutler.TextUtils;
-import br.ufes.inf.nemo.rightplace.core.domain.Academic;
+import br.ufes.inf.nemo.rightplace.core.domain.User;
 import br.ufes.inf.nemo.rightplace.core.domain.RightplaceConfiguration;
 import br.ufes.inf.nemo.rightplace.core.exceptions.SystemInstallFailedException;
-import br.ufes.inf.nemo.rightplace.core.persistence.AcademicDAO;
+import br.ufes.inf.nemo.rightplace.core.persistence.UserDAO;
 import br.ufes.inf.nemo.rightplace.core.persistence.RightplaceConfigurationDAO;
 
 /**
@@ -29,9 +29,9 @@ public class InstallSystemServiceBean implements InstallSystemService {
 	/** The logger. */
 	private static final Logger logger = Logger.getLogger(InstallSystemServiceBean.class.getCanonicalName());
 
-	/** The DAO for Academic objects. */
+	/** The DAO for User objects. */
 	@EJB
-	private AcademicDAO academicDAO;
+	private UserDAO academicDAO;
 
 	/** The DAO for RightplaceConfiguration objects. */
 	@EJB
@@ -43,10 +43,10 @@ public class InstallSystemServiceBean implements InstallSystemService {
 
 	/**
 	 * @see br.ufes.inf.nemo.rightplace.core.application.InstallSystemService#installSystem(br.ufes.inf.nemo.rightplace.core.domain.RightplaceConfiguration,
-	 *      br.ufes.inf.nemo.rightplace.core.domain.Academic)
+	 *      br.ufes.inf.nemo.rightplace.core.domain.User)
 	 */
 	@Override
-	public void installSystem(RightplaceConfiguration config, Academic admin) throws SystemInstallFailedException {
+	public void installSystem(RightplaceConfiguration config, User admin) throws SystemInstallFailedException {
 		logger.log(Level.FINER, "Installing system...");
 
 		try {

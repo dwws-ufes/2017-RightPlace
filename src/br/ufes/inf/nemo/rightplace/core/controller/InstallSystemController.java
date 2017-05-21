@@ -12,7 +12,7 @@ import javax.inject.Named;
 
 import br.ufes.inf.nemo.jbutler.ejb.controller.JSFController;
 import br.ufes.inf.nemo.rightplace.core.application.InstallSystemService;
-import br.ufes.inf.nemo.rightplace.core.domain.Academic;
+import br.ufes.inf.nemo.rightplace.core.domain.User;
 import br.ufes.inf.nemo.rightplace.core.domain.RightplaceConfiguration;
 import br.ufes.inf.nemo.rightplace.core.exceptions.SystemInstallFailedException;
 
@@ -43,7 +43,7 @@ public class InstallSystemController extends JSFController {
 	private InstallSystemService installSystemService;
 
 	/** Input: the administrator being registered during the installation. */
-	private Academic admin = new Academic();
+	private User admin = new User();
 
 	/** Input: the repeated password for the admininstrator registration. */
 	private String repeatPassword;
@@ -62,7 +62,7 @@ public class InstallSystemController extends JSFController {
 	}
 
 	/** Getter for admin. */
-	public Academic getAdmin() {
+	public User getAdmin() {
 		return admin;
 	}
 

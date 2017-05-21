@@ -83,7 +83,7 @@
 				<p:hotkey bind="#{msgs['jbutler.crud.hotkey.create']}" action="#{manage${Entities}Controller.create}" />
 				<p:hotkey bind="#{msgs['jbutler.crud.hotkey.retrieve']}" action="#{manage${Entities}Controller.retrieve}" rendered="#{manage${Entities}Controller.selectedEntity != null}" />
 				<p:hotkey bind="#{msgs['jbutler.crud.hotkey.update']}" action="#{manage${Entities}Controller.update}" rendered="#{manage${Entities}Controller.selectedEntity != null}" />
-				<p:hotkey bind="#{msgs['jbutler.crud.hotkey.delete']}" action="#{manage${Entities}Controller.trash}" rendered="#{manageAcademicsController.selectedEntity != null}" process="@this" update=":listingForm:trashGroup" />
+				<p:hotkey bind="#{msgs['jbutler.crud.hotkey.delete']}" action="#{manage${Entities}Controller.trash}" rendered="#{manageUsersController.selectedEntity != null}" process="@this" update=":listingForm:trashGroup" />
 			</h:panelGroup>
 
 			<!-- The trash panel: shows entities that have been selected for deletion. -->

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import br.ufes.inf.nemo.jbutler.ejb.controller.JSFController;
 import br.ufes.inf.nemo.rightplace.core.application.CoreInformation;
 import br.ufes.inf.nemo.rightplace.core.application.SessionInformation;
-import br.ufes.inf.nemo.rightplace.core.domain.Academic;
+import br.ufes.inf.nemo.rightplace.core.domain.User;
 import br.ufes.inf.nemo.rightplace.core.exceptions.LoginFailedException;
 
 /**
@@ -78,9 +78,9 @@ public class SessionController extends JSFController {
 	/**
 	 * Provides the current authenticated user.
 	 * 
-	 * @return The Academic object that represents the user that has been authenticated in this session.
+	 * @return The User object that represents the user that has been authenticated in this session.
 	 */
-	public Academic getCurrentUser() {
+	public User getCurrentUser() {
 		return sessionInformation.getCurrentUser();
 	}
 

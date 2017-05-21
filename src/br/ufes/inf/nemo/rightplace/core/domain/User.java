@@ -22,7 +22,7 @@ import br.ufes.inf.nemo.rightplace.people.domain.Telephone;
  * @version 1.0
  */
 @Entity
-public class Academic extends Person {
+public class User extends Person {
 	/** Serialization id. */
 	private static final long serialVersionUID = 1L;
 

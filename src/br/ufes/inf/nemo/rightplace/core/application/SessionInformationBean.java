@@ -13,9 +13,9 @@ import javax.enterprise.context.SessionScoped;
 import br.ufes.inf.nemo.jbutler.TextUtils;
 import br.ufes.inf.nemo.jbutler.ejb.persistence.exceptions.MultiplePersistentObjectsFoundException;
 import br.ufes.inf.nemo.jbutler.ejb.persistence.exceptions.PersistentObjectNotFoundException;
-import br.ufes.inf.nemo.rightplace.core.domain.Academic;
+import br.ufes.inf.nemo.rightplace.core.domain.User;
 import br.ufes.inf.nemo.rightplace.core.exceptions.LoginFailedException;
-import br.ufes.inf.nemo.rightplace.core.persistence.AcademicDAO;
+import br.ufes.inf.nemo.rightplace.core.persistence.UserDAO;
 
 /**
  * Stateful session bean implementing the session information component. See the implemented interface documentation for
@@ -33,16 +33,16 @@ public class SessionInformationBean implements SessionInformation {
 	/** The logger. */
 	private static final Logger logger = Logger.getLogger(SessionInformationBean.class.getCanonicalName());
 
-	/** The DAO for Academic objects. */
+	/** The DAO for User objects. */
 	@EJB
-	private AcademicDAO academicDAO;
+	private UserDAO academicDAO;
 
 	/** The current user logged in. */
-	private Academic currentUser;
+	private User currentUser;
 
 	/** @see br.org.feees.sigme.core.application.SessionInformation#getCurrentUser() */
 	@Override
-	public Academic getCurrentUser() {
+	public User getCurrentUser() {
 		return currentUser;
 	}
 
@@ -52,7 +52,7 @@ public class SessionInformationBean implements SessionInformation {
 		try {
 			// Obtains the user given the e-mail address (that serves as username).
 			logger.log(Level.FINER, "Authenticating user with username \"{0}\"...", username);
-			Academic user = academicDAO.retrieveByEmail(username);
+			User user = academicDAO.retrieveByEmail(username);
 
 			// Creates the MD5 hash of the password for comparison.
 			String md5pwd = TextUtils.produceMd5Hash(password);
@@ -63,7 +63,7 @@ public class SessionInformationBean implements SessionInformation {
 				logger.log(Level.FINEST, "Passwords match for user \"{0}\".", username);
 
 				// Login successful. Registers the current user in the session.
-				logger.log(Level.FINE, "Academic \"{0}\" successfully logged in.", username);
+				logger.log(Level.FINE, "User \"{0}\" successfully logged in.", username);
 				currentUser = user;
 				pwd = null;
 
@@ -75,7 +75,7 @@ public class SessionInformationBean implements SessionInformation {
 			}
 			else {
 				// Passwords don't match.
-				logger.log(Level.INFO, "Academic \"{0}\" not logged in: password didn't match.", username);
+				logger.log(Level.INFO, "User \"{0}\" not logged in: password didn't match.", username);
 				throw new LoginFailedException(LoginFailedException.LoginFailedReason.INCORRECT_PASSWORD);
 			}
 		}
