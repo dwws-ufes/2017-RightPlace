@@ -2,7 +2,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.ufes.inf.nemo</groupId>
 	<artifactId>Rightplace</artifactId>
-	<version>1.2.4</version>
 	<packaging>war</packaging>
 	<repositories>
 		<repository>
@@ -64,4 +63,5 @@
 			<version>1.0.10</version>
 		</dependency>
 	</dependencies>
+	<version>1</version>
 </project>
