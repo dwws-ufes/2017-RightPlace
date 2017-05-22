@@ -32,6 +32,10 @@ public class User extends Person {
 	@Size(max = 15)
 	private String shortName;
 
+	@Basic
+	@NotNull
+	@Size(max = 15)
+	private String name;
 	/** Electronic address, which also serves as username for identification. */
 	@Basic
 	@Size(max = 100)
@@ -67,6 +71,15 @@ public class User extends Person {
 	/** Setter for shortName. */
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
+	}
+	/** Getter for shortName. */
+	public String getName() {
+		return name;
+	}
+
+	/** Setter for shortName. */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/** Getter for email. */

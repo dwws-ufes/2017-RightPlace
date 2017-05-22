@@ -7,11 +7,12 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import br.ufes.inf.nemo.jbutler.ejb.application.CrudServiceBean;
+import br.ufes.inf.nemo.jbutler.ejb.persistence.BaseDAO;
 import br.ufes.inf.nemo.rightplace.core.domain.User;
 import br.ufes.inf.nemo.rightplace.core.persistence.UserDAO;
 
 @Stateless @PermitAll
-public class ManageUserServiceBean extends CrudServiceBean<br.ufes.inf.nemo.rightplace.core.domain.User>
+public class ManageUserServiceBean extends CrudServiceBean<User>
 		implements ManageUserService {
 
 	
@@ -24,8 +25,6 @@ public class ManageUserServiceBean extends CrudServiceBean<br.ufes.inf.nemo.righ
 	 */
 	
 	@EJB private UserDAO userDAO;
-
-
 	
 	public UserDAO getDAO(){
 		return userDAO;

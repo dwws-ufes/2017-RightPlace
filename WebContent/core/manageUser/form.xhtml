@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -34,7 +33,7 @@
 					<p:ajax event="blur" update="nameField" />
 				</p:inputText>
 			</ui:decorate>
-
+			
 			<ui:decorate template="/resources/#{coreInfo.decorator}/formfield.xhtml">
 				<ui:param name="fieldName" value="email" />
 				<ui:param name="label" value="#{msgsCore['manageUser.form.email']}" />
@@ -42,14 +41,13 @@
 					<p:ajax event="blur" update="emailField" />
 				</p:inputText>
 			</ui:decorate>
+			
 			<ui:decorate template="/resources/#{coreInfo.decorator}/formfield.xhtml">
 				<ui:param name="fieldName" value="birthDate" />
 				<ui:param name="label" value="#{msgsCore['manageUser.form.birthDate']}" />
-				<p:inputMask id="birthDate" mask="#{msgs['jbutler.format.date.primefaces']}" value="#{manageUserController.selectedEntity.birthDate}" disabled="#{manageUserController.readOnly}">
-				<p:ajax event="blur" update="birthDateField" />
-				<f:convertDateTime type="date" pattern="#{msgs['jbutler.format.date.java']}" />
-				</p:inputMask>
-				<h:outputText value=" (#{msgs['jbutler.format.date.label']})" />
+				<p:inputText id="birthDate" value="#{manageUserController.selectedEntity.birthDate}" required="false" pt:placeholder="#{msgsCore['manageUser.form.birthDate.placeholder']}" disabled="#{manageUserController.readOnly}">
+					<p:ajax event="blur" update="birthDateField" />
+				</p:inputText>
 			</ui:decorate>
 
 			<h:panelGroup rendered="#{! manageUserController.readOnly}">
@@ -60,7 +58,6 @@
 					<p:hotkey bind="#{msgs['jbutler.crud.hotkey.backToList']}" action="#{manageUserController.list}" immediate="true" />
 				</ui:decorate>
 			</h:panelGroup>
-			
 			<h:panelGroup rendered="#{manageUserController.readOnly}">
 				<ui:decorate template="/resources/#{coreInfo.decorator}/formbuttonpanel-01.xhtml">
 					<p:commandButton id="backButton" action="#{manageUserController.list}" value="#{msgs['jbutler.crud.button.back']}" immediate="true" icon="fa fa-fw fa-arrow-circle-left" />

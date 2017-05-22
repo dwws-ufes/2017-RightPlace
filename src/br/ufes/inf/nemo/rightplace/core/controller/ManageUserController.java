@@ -17,6 +17,12 @@ public class ManageUserController extends CrudController<User> {
 /**
 	 * 
 	 */
+	
+	public ManageUserController (){
+	    viewPath = "/manageUser/";
+	    bundleName = "msgs";
+	}
+	
 	private static final long serialVersionUID = 1L;
 	@EJB private  ManageUserService manageUserService;
 
@@ -26,6 +32,11 @@ public class ManageUserController extends CrudController<User> {
 		return manageUserService;
 	}
 
+	@Override
+	protected User createNewEntity() {
+		return new User();
+	}
+	
 	@Override
 	protected void initFilters() {
 		// TODO Auto-generated method stub
