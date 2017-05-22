@@ -9,10 +9,10 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import br.ufes.inf.nemo.jbutler.TextUtils;
-import br.ufes.inf.nemo.marvin.core.domain.Academic;
+import br.ufes.inf.nemo.marvin.core.domain.User;
 import br.ufes.inf.nemo.marvin.core.domain.MarvinConfiguration;
 import br.ufes.inf.nemo.marvin.core.exceptions.SystemInstallFailedException;
-import br.ufes.inf.nemo.marvin.core.persistence.AcademicDAO;
+import br.ufes.inf.nemo.marvin.core.persistence.UserDAO;
 import br.ufes.inf.nemo.marvin.core.persistence.MarvinConfigurationDAO;
 
 /**
@@ -29,9 +29,9 @@ public class InstallSystemServiceBean implements InstallSystemService {
 	/** The logger. */
 	private static final Logger logger = Logger.getLogger(InstallSystemServiceBean.class.getCanonicalName());
 
-	/** The DAO for Academic objects. */
+	/** The DAO for User objects. */
 	@EJB
-	private AcademicDAO academicDAO;
+	private UserDAO userDAO;
 
 	/** The DAO for MarvinConfiguration objects. */
 	@EJB
@@ -43,10 +43,10 @@ public class InstallSystemServiceBean implements InstallSystemService {
 
 	/**
 	 * @see br.ufes.inf.nemo.marvin.core.application.InstallSystemService#installSystem(br.ufes.inf.nemo.marvin.core.domain.MarvinConfiguration,
-	 *      br.ufes.inf.nemo.marvin.core.domain.Academic)
+	 *      br.ufes.inf.nemo.marvin.core.domain.User)
 	 */
 	@Override
-	public void installSystem(MarvinConfiguration config, Academic admin) throws SystemInstallFailedException {
+	public void installSystem(MarvinConfiguration config, User admin) throws SystemInstallFailedException {
 		logger.log(Level.FINER, "Installing system...");
 
 		try {
@@ -62,7 +62,7 @@ public class InstallSystemServiceBean implements InstallSystemService {
 
 			// Saves the administrator.
 			logger.log(Level.FINER, "Persisting admin data...\n\t- Short name = {0}\n\t- Last update date = {1}", new Object[] { admin.getShortName(), admin.getLastUpdateDate() });
-			academicDAO.save(admin);
+			userDAO.save(admin);
 			logger.log(Level.FINE, "The administrator has been saved: {0} ({1})", new Object[] { admin.getName(), admin.getEmail() });
 
 			// Saves Marvin's configuration.

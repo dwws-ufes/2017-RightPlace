@@ -13,9 +13,9 @@ import javax.enterprise.context.SessionScoped;
 import br.ufes.inf.nemo.jbutler.TextUtils;
 import br.ufes.inf.nemo.jbutler.ejb.persistence.exceptions.MultiplePersistentObjectsFoundException;
 import br.ufes.inf.nemo.jbutler.ejb.persistence.exceptions.PersistentObjectNotFoundException;
-import br.ufes.inf.nemo.marvin.core.domain.Academic;
+import br.ufes.inf.nemo.marvin.core.domain.User;
 import br.ufes.inf.nemo.marvin.core.exceptions.LoginFailedException;
-import br.ufes.inf.nemo.marvin.core.persistence.AcademicDAO;
+import br.ufes.inf.nemo.marvin.core.persistence.UserDAO;
 
 /**
  * Stateful session bean implementing the session information component. See the implemented interface documentation for
@@ -33,16 +33,16 @@ public class SessionInformationBean implements SessionInformation {
 	/** The logger. */
 	private static final Logger logger = Logger.getLogger(SessionInformationBean.class.getCanonicalName());
 
-	/** The DAO for Academic objects. */
+	/** The DAO for User objects. */
 	@EJB
-	private AcademicDAO academicDAO;
+	private UserDAO userDAO;
 
 	/** The current user logged in. */
-	private Academic currentUser;
+	private User currentUser;
 
 	/** @see br.org.feees.sigme.core.application.SessionInformation#getCurrentUser() */
 	@Override
-	public Academic getCurrentUser() {
+	public User getCurrentUser() {
 		return currentUser;
 	}
 
@@ -52,7 +52,7 @@ public class SessionInformationBean implements SessionInformation {
 		try {
 			// Obtains the user given the e-mail address (that serves as username).
 			logger.log(Level.FINER, "Authenticating user with username \"{0}\"...", username);
-			Academic user = academicDAO.retrieveByEmail(username);
+			User user = userDAO.retrieveByEmail(username);
 
 			// Creates the MD5 hash of the password for comparison.
 			String md5pwd = TextUtils.produceMd5Hash(password);
@@ -63,30 +63,30 @@ public class SessionInformationBean implements SessionInformation {
 				logger.log(Level.FINEST, "Passwords match for user \"{0}\".", username);
 
 				// Login successful. Registers the current user in the session.
-				logger.log(Level.FINE, "Academic \"{0}\" successfully logged in.", username);
+				logger.log(Level.FINE, "User \"{0}\" successfully logged in.", username);
 				currentUser = user;
 				pwd = null;
 
 				// Registers the user login.
 				Date now = new Date(System.currentTimeMillis());
-				logger.log(Level.FINER, "Setting last login date for academic with username \"{0}\" as \"{1}\"...", new Object[] { currentUser.getEmail(), now });
+				logger.log(Level.FINER, "Setting last login date for user with username \"{0}\" as \"{1}\"...", new Object[] { currentUser.getEmail(), now });
 				currentUser.setLastLoginDate(now);
-				academicDAO.save(currentUser);
+				userDAO.save(currentUser);
 			}
 			else {
 				// Passwords don't match.
-				logger.log(Level.INFO, "Academic \"{0}\" not logged in: password didn't match.", username);
+				logger.log(Level.INFO, "User \"{0}\" not logged in: password didn't match.", username);
 				throw new LoginFailedException(LoginFailedException.LoginFailedReason.INCORRECT_PASSWORD);
 			}
 		}
 		catch (PersistentObjectNotFoundException e) {
-			// No academic was found with the given username.
-			logger.log(Level.INFO, "User \"{0}\" not logged in: no registered academic found with given username.", username);
+			// No user was found with the given username.
+			logger.log(Level.INFO, "User \"{0}\" not logged in: no registered user found with given username.", username);
 			throw new LoginFailedException(e, LoginFailedException.LoginFailedReason.UNKNOWN_USERNAME);
 		}
 		catch (MultiplePersistentObjectsFoundException e) {
-			// Multiple academics were found with the same username.
-			logger.log(Level.WARNING, "User \"{0}\" not logged in: there are more than one registered academic with the given username.", username);
+			// Multiple users were found with the same username.
+			logger.log(Level.WARNING, "User \"{0}\" not logged in: there are more than one registered user with the given username.", username);
 			throw new LoginFailedException(e, LoginFailedException.LoginFailedReason.MULTIPLE_USERS);
 		}
 		catch (EJBTransactionRolledbackException e) {
