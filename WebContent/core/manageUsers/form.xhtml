@@ -74,7 +74,7 @@
 					required="false"
 					pt:placeholder="#{msgsCore['manageUsers.form.shortName.placeholder']}"
 					disabled="#{manageUsersController.readOnly}">
-					<p:ajax event="blur" update="shortNameField" />
+					<p:ajax event="blur" listener="#{manageUsersController.suggestShortName}" update="shortNameField" />
 				</p:inputText>
 			</ui:decorate>
 
