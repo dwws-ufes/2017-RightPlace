@@ -15,7 +15,8 @@ Configure the MySQL JDBC driver in WildFly;
 
 Configure the datasource in WildFly's standalone.xml file:
 
- <datasource jta="true" jndi-name="java:jboss/datasources/Rightplace" pool-name="RightplacePool" enabled="true" use-java-context="true">
+```XML
+ <datasource jta="true" jndi-name="java:jboss/datasources/Rightplace" pool-name="RightplacePool" enabled="true" 					use-java-context="true">
                     <connection-url>jdbc:mysql://localhost:3306/rightplace</connection-url>
                     <driver>mysql</driver>
                     <security>
@@ -26,6 +27,7 @@ Configure the datasource in WildFly's standalone.xml file:
                 <driver name="mysql" module="com.mysql">
                     <driver-class>com.mysql.jdbc.Driver</driver-class>
                 </driver>
+```
 
 In Eclipse, use File > Import > Git > Projects from Git to import the Eclipse project existing in this repository;
 
