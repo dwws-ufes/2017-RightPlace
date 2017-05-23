@@ -24,4 +24,5 @@ public interface PlaceDAO extends BaseDAO<Place> {
 	 * @throws MultiplePersistentObjectsFoundException
 	 */
 	Place retrieveByname(String name) throws PersistentObjectNotFoundException, MultiplePersistentObjectsFoundException;
+
 }
