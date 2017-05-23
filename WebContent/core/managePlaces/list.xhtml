@@ -89,7 +89,7 @@
 			<!-- Buttons shown below the listing. -->
 			<h:panelGroup id="buttonsGroup">
 				<ui:decorate template="/resources/#{coreInfo.decorator}/formbuttonpanel-04.xhtml">
-					<p:commandButton action="#{managePlacesController.create}" value="#{msgs['jbutler.crud.button.create']}" icon="fa fa-fw fa-place-plus" />
+					<p:commandButton action="#{managePlacesController.create}" value="#{msgs['jbutler.crud.button.create']}" icon="fa fa-fw fa-suitcase" />
 					<p:commandButton action="#{managePlacesController.retrieve}" value="#{msgs['jbutler.crud.button.retrieve']}" icon="fa fa-fw fa-file-text" disabled="#{managePlacesController.selectedEntity == null}" />
 					<p:commandButton action="#{managePlacesController.update}" value="#{msgs['jbutler.crud.button.update']}" icon="fa fa-fw fa-refresh" disabled="#{managePlacesController.selectedEntity == null}" />
 					<p:commandButton action="#{managePlacesController.trash}" value="#{msgs['jbutler.crud.button.delete']}" icon="fa fa-fw fa-trash-o" disabled="#{managePlacesController.selectedEntity == null}" process="@this" update=":listingForm:trashGroup" />

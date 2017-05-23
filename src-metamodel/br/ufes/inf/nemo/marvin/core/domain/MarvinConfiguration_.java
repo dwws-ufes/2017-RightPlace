@@ -10,5 +10,4 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(MarvinConfiguration.class)
 public class MarvinConfiguration_ extends PersistentObjectSupport_ {
 	public static volatile SingularAttribute<MarvinConfiguration, Date> creationDate;
-	public static volatile SingularAttribute<MarvinConfiguration, String> institutionAcronym;
 }
