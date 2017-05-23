@@ -13,13 +13,13 @@
 	<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/default/stylesheets/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/default/stylesheets/ionicons-2.0.1/css/ionicons.min.css" />
 	<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/default/stylesheets/AdminLTE-2.3.0/dist/css/AdminLTE.min.css" />
-	<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/default/stylesheets/AdminLTE-2.3.0/dist/css/skins/skin-blue.min.css" />
+	<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/default/stylesheets/AdminLTE-2.3.0/dist/css/skins/skin-green.min.css" />
 	<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/default/stylesheets/marvin.css" />
 	<script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/default/scripts/jbutler.js" />
 	<title><h:outputText value="Rightplace :: " /> <ui:insert name="title" /></title>
 	<ui:insert name="head" />
 </h:head>
-<h:body class="hold-transition skin-blue sidebar-mini">
+<h:body class="hold-transition skin-green sidebar-mini">
 	<div class="wrapper">
 
 		<!-- Main Header -->
@@ -230,7 +230,11 @@
 					<li class="header"><h:outputText value="#{msgs['title.menu']}" /></li>
 					<li><h:commandLink action="#{installSystemController.begin}" rendered="#{not coreInfo.systemInstalled}"><i class="fa fa-cogs"></i> <span><h:outputText value="#{msgsCore['core.menu.installSystem']}" /></span></h:commandLink></li>
 					<li><h:link outcome="/core/login/index" rendered="#{coreInfo.systemInstalled and not sessionController.loggedIn}"><i class="fa fa-key"></i> <span><h:outputText value="#{msgsCore['core.menu.login']}" /></span></h:link></li>
+					<li><h:link outcome="/core/manageUsers/list" rendered="#{coreInfo.systemInstalled and sessionController.loggedIn}"><i class="fa fa-cog"></i> <span><h:outputText value="#{msgsCore['core.menu.users']}" /></span></h:link></li>
+					<li><h:link outcome="/core/managePlaces/list" rendered="#{coreInfo.systemInstalled and sessionController.loggedIn}"><i class="fa fa-plane"></i> <span><h:outputText value="#{msgsCore['core.menu.places']}" /></span></h:link></li>
 				</ul>
+				
+				
 				</h:form>
 				<!-- /.sidebar-menu -->
 			</section>
@@ -242,8 +246,9 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					<ui:insert name="title" /> <small><ui:insert name="description" /></small>
+					<ui:insert name="title" /> 
 				</h1>
+				<small><ui:insert name="description" /></small>
 				
 				<!-- FIXME: hidden -->
 				<h:panelGroup rendered="false">
@@ -271,10 +276,11 @@
 		<!-- Main Footer -->
 		<footer class="main-footer">
 			<!-- To the right -->
-			<div class="pull-right hidden-xs"><h:outputLink value="https://www.google.com/webhp"><h:outputText value="42" /><f:param name="q" value="Answer+to+the+Ultimate+Question+of+Life%2C+the+Universe%2C+and+Everything" /></h:outputLink></div>
+			<div class="pull-right hidden-xs"><h:outputLink value="https://www.google.com/webhp"><h:outputText value="Que tal Nova York?" /><f:param name="q" value="New York Airplane" /></h:outputLink></div>
 			<!-- Default to the left -->
-			<strong>Copyright &#169; 2015 <a href="http://nemo.inf.ufes.br">Nemo/Ufes</a>.
-			</strong> All rights reserved.
+			    <div align="center" style="margin-top: 20px;">
+			<strong>Copyright &#169; 2017 Flávio M. e Mateus T.</strong> All rights reserved.
+			</div>
 		</footer>
 
 		<!-- FIXME: hidden - Control Sidebar -->

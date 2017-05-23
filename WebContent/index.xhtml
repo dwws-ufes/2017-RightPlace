@@ -10,14 +10,23 @@
 
 	<ui:define name="head"></ui:define>
 	
-    <ui:define name="title"><h:outputText value="#{msgs['title.home']}" /></ui:define>
+    <ui:define name="title">  
+      	<div align="center" style="margin-top: 20px;">
+    			<h:outputText value="#{msgs['title.home']}" />
+		</div>
+	</ui:define>
     
-    <ui:define name="description"><h:outputText value="#{coreInfo.quote}" /></ui:define>
+    <ui:define name="description">
+    <div align="center" style="margin-top: 20px;">
+    <h:outputText value="#{coreInfo.quote}" />
+    </div>
+    </ui:define>
+    	
 
     <ui:define name="body">
     	<div align="center" style="margin-top: 20px;">
-    		<h:outputLink value="http://gooie-duck.deviantart.com/art/Marvin-the-Paranoid-Android-192324294">
-    			<h:graphicImage library="default" name="images/marvin.jpg" style="border: 1px solid black;" />
+    	<h:outputLink value="https://www.google.com.br/search?q=Honk+Kong">
+    			<h:graphicImage library="default" name="images/cidade.jpg" style="border: 1px solid black;" />
     		</h:outputLink>
     	</div>
     </ui:define>

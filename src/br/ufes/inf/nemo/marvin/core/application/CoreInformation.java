@@ -103,7 +103,6 @@ public class CoreInformation implements Serializable {
 		return decorator;
 	}
 
-	/** Gets a random quote from Marvin. */
 	public String getQuote() {
 		int idx = random.nextInt(quotes.size());
 		return quotes.get(idx);
