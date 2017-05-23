@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	template="/resources/#{coreInfo.decorator}/decorator.xhtml">
+
+	<ui:define name="title">
+		<h:outputText value="#{msgsCore['managePlaces.title.create']}"
+			rendered="#{(! managePlacesController.readOnly) and (managePlacesController.selectedEntity.id == null)}" />
+		<h:outputText value="#{msgsCore['managePlaces.title.update']}"
+			rendered="#{(! managePlacesController.readOnly) and (managePlacesController.selectedEntity.id != null)}" />
+		<h:outputText value="#{msgsCore['managePlaces.title.retrieve']}"
+			rendered="#{managePlacesController.readOnly}" />
+	</ui:define>
+
+	<ui:define name="description">
+		<h:outputText
+			value="#{msgsCore['managePlaces.title.create.description']}"
+			rendered="#{(! managePlacesController.readOnly) and (managePlacesController.selectedEntity.id == null)}" />
+		<h:outputText
+			value="#{msgsCore['managePlaces.title.update.description']}"
+			rendered="#{(! managePlacesController.readOnly) and (managePlacesController.selectedEntity.id != null)}" />
+		<h:outputText
+			value="#{msgsCore['managePlaces.title.retrieve.description']}"
+			rendered="#{managePlacesController.readOnly}" />
+	</ui:define>
+
+	<ui:define name="body">
+		<ui:decorate template="/resources/#{coreInfo.decorator}/form.xhtml">
+			<ui:param name="formName" value="form" />
+			<ui:param name="formLabel"
+				value="#{msgsCore['managePlaces.form.title']}" />
+			<p:hotkey bind="#{msgs['jbutler.crud.hotkey.focusFirstField']}"
+				handler="findObjectById('form:name').focus();" />
+
+			<ui:decorate
+				template="/resources/#{coreInfo.decorator}/formfield.xhtml">
+				<ui:param name="fieldName" value="name" />
+				<ui:param name="label" value="#{msgsCore['managePlaces.form.name']}" />
+				<p:inputText id="name"
+					value="#{managePlacesController.selectedEntity.name}"
+					required="true"
+					pt:placeholder="#{msgsCore['managePlaces.form.name.placeholder']}"
+					disabled="#{managePlacesController.readOnly}">
+					<p:ajax event="blur" update="nameField" />
+				</p:inputText>
+			</ui:decorate>
+		
+					
+			<ui:decorate
+				template="/resources/#{coreInfo.decorator}/formfield.xhtml">
+				<ui:param name="fieldName" value="country" />
+				<ui:param name="label" value="#{msgsCore['managePlaces.form.country']}" />
+				<p:inputText id="country"
+					value="#{managePlacesController.selectedEntity.country}"
+					required="true"
+					pt:placeholder="#{msgsCore['managePlaces.form.country.placeholder']}"
+					disabled="#{managePlacesController.readOnly}">
+					<p:ajax event="blur" update="countryField" />
+				</p:inputText>
+			</ui:decorate>
+
+			<ui:decorate
+				template="/resources/#{coreInfo.decorator}/formfield.xhtml">
+				<ui:param name="fieldName" value="state" />
+				<ui:param name="label"
+					value="#{msgsCore['managePlaces.form.state']}" />
+				<p:inputText id="state"
+					value="#{managePlacesController.selectedEntity.state}"
+					required="false"
+					pt:placeholder="#{msgsCore['managePlaces.form.state.placeholder']}"
+					disabled="#{managePlacesController.readOnly}">
+				</p:inputText>
+			</ui:decorate>
+		<ui:decorate
+				template="/resources/#{coreInfo.decorator}/formfield.xhtml">
+				<ui:param name="fieldName" value="area" />
+				<ui:param name="label"
+					value="#{msgsCore['managePlaces.form.area']}" />
+				<p:inputText id="area"
+					value="#{managePlacesController.selectedEntity.area}"
+					required="false"
+					pt:placeholder="#{msgsCore['managePlaces.form.area.placeholder']}"
+					disabled="#{managePlacesController.readOnly}">
+				</p:inputText>
+			</ui:decorate>
+					<ui:decorate
+				template="/resources/#{coreInfo.decorator}/formfield.xhtml">
+				<ui:param name="fieldName" value="height" />
+				<ui:param name="label"
+					value="#{msgsCore['managePlaces.form.height']}" />
+				<p:inputText id="height"
+					value="#{managePlacesController.selectedEntity.height}"
+					required="false"
+					pt:placeholder="#{msgsCore['managePlaces.form.height.placeholder']}"
+					disabled="#{managePlacesController.readOnly}">
+				</p:inputText>
+			</ui:decorate>
+			
+		<ui:decorate
+				template="/resources/#{coreInfo.decorator}/formfield.xhtml">
+				<ui:param name="fieldName" value="population" />
+				<ui:param name="label"
+					value="#{msgsCore['managePlaces.form.population']}" />
+				<p:inputText id="population"
+					value="#{managePlacesController.selectedEntity.population}"
+					required="false"
+					pt:placeholder="#{msgsCore['managePlaces.form.population.placeholder']}"
+					disabled="#{managePlacesController.readOnly}">
+				</p:inputText>
+			</ui:decorate>
+			
+		<ui:decorate
+				template="/resources/#{coreInfo.decorator}/formfield.xhtml">
+				<ui:param name="fieldName" value="climate" />
+				<ui:param name="label"
+					value="#{msgsCore['managePlaces.form.climate']}" />
+				<p:inputText id="climate"
+					value="#{managePlacesController.selectedEntity.climate}"
+					required="false"
+					pt:placeholder="#{msgsCore['managePlaces.form.climate.placeholder']}"
+					disabled="#{managePlacesController.readOnly}">
+				</p:inputText>
+			</ui:decorate>
+
+
+			<h:panelGroup rendered="#{! managePlacesController.readOnly}">
+				<ui:decorate
+					template="/resources/#{coreInfo.decorator}/formbuttonpanel-02.xhtml">
+					<p:commandButton id="cancelButton"
+						action="#{managePlacesController.list}"
+						value="#{msgs['jbutler.crud.button.cancel']}" immediate="true"
+						icon="fa fa-fw fa-close" />
+					<p:commandButton id="saveButton"
+						action="#{managePlacesController.save}"
+						value="#{msgs['jbutler.crud.button.save']}"
+						update=":form :globalMessages" icon="fa fa-fw fa-save" />
+					<p:defaultCommand target="saveButton" />
+					<p:hotkey bind="#{msgs['jbutler.crud.hotkey.backToList']}"
+						action="#{managePlacesController.list}" immediate="true" />
+				</ui:decorate>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{managePlacesController.readOnly}">
+				<ui:decorate
+					template="/resources/#{coreInfo.decorator}/formbuttonpanel-01.xhtml">
+					<p:commandButton id="backButton"
+						action="#{managePlacesController.list}"
+						value="#{msgs['jbutler.crud.button.back']}" immediate="true"
+						icon="fa fa-fw fa-arrow-circle-left" />
+					<p:hotkey bind="#{msgs['jbutler.crud.hotkey.backToList']}"
+						action="#{managePlacesController.list}" immediate="true" />
+				</ui:decorate>
+			</h:panelGroup>
+		</ui:decorate>
+	</ui:define>
+</ui:composition>

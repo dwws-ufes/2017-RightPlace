@@ -50,7 +50,20 @@
 					<p:ajax event="blur" update="nameField" />
 				</p:inputText>
 			</ui:decorate>
-			
+		
+			<ui:decorate
+				template="/resources/#{coreInfo.decorator}/formfield.xhtml">
+				<ui:param name="fieldName" value="place" />
+				<ui:param name="label" value="#{msgsCore['manageUsers.form.place']}" />
+				<p:inputText id="place"
+					value="#{manageUsersController.selectedEntity.places.name}"
+					required="false"
+					pt:placeholder="#{msgsCore['manageUsers.form.place.placeholder']}"
+					disabled="#{manageUsersController.readOnly}">
+					<p:ajax event="blur" update="nameField" />
+				</p:inputText>
+			</ui:decorate>
+					
 			<ui:decorate
 				template="/resources/#{coreInfo.decorator}/formfield.xhtml">
 				<ui:param name="fieldName" value="email" />

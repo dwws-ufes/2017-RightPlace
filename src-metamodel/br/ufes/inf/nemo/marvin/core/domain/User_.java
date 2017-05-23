@@ -18,4 +18,6 @@ public class User_ extends Person_ {
 	public static volatile SingularAttribute<User, Date> creationDate;
 	public static volatile SingularAttribute<User, Date> lastUpdateDate;
 	public static volatile SingularAttribute<User, Date> lastLoginDate;
+	public static volatile SetAttribute<User, Place> places;
+
 }

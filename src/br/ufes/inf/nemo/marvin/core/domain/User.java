@@ -1,6 +1,7 @@
 package br.ufes.inf.nemo.marvin.core.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 import java.util.Date;
 import java.util.Set;
@@ -37,7 +38,10 @@ public class User extends Person {
 	@Basic
 	@Size(max = 32)
 	private String password;
-
+	
+	@ManyToMany
+	private Set<Place> places;
+	
 	/** Phone numbers. */
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Telephone> telephones;
