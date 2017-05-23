@@ -82,24 +82,24 @@
 				<ui:param name="fieldName" value="area" />
 				<ui:param name="label"
 					value="#{msgsCore['managePlaces.form.area']}" />
-				<p:inputText id="area"
+				<p:inputNumber id="area"
 					value="#{managePlacesController.selectedEntity.area}"
 					required="false"
 					pt:placeholder="#{msgsCore['managePlaces.form.area.placeholder']}"
 					disabled="#{managePlacesController.readOnly}">
-				</p:inputText>
+				</p:inputNumber>
 			</ui:decorate>
 					<ui:decorate
 				template="/resources/#{coreInfo.decorator}/formfield.xhtml">
 				<ui:param name="fieldName" value="height" />
 				<ui:param name="label"
 					value="#{msgsCore['managePlaces.form.height']}" />
-				<p:inputText id="height"
+				<p:inputNumber id="height"
 					value="#{managePlacesController.selectedEntity.height}"
 					required="false"
 					pt:placeholder="#{msgsCore['managePlaces.form.height.placeholder']}"
 					disabled="#{managePlacesController.readOnly}">
-				</p:inputText>
+				</p:inputNumber>
 			</ui:decorate>
 			
 		<ui:decorate
@@ -107,12 +107,12 @@
 				<ui:param name="fieldName" value="population" />
 				<ui:param name="label"
 					value="#{msgsCore['managePlaces.form.population']}" />
-				<p:inputText id="population"
+				<p:inputNumber id="population"
 					value="#{managePlacesController.selectedEntity.population}"
 					required="false"
 					pt:placeholder="#{msgsCore['managePlaces.form.population.placeholder']}"
 					disabled="#{managePlacesController.readOnly}">
-				</p:inputText>
+				</p:inputNumber>
 			</ui:decorate>
 			
 		<ui:decorate
