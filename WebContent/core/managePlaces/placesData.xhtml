@@ -15,7 +15,9 @@
 		<h:inputText id="name" value="#{showPlace.place.name}" size="30">
 		<f:ajax event="blur" listener="#{showPlace.suggestPlace}" 
 		execute="@this" render="description" />
+		
 		</h:inputText>
+		
 		<script>
 		jsf.ajax.addOnEvent(function(data) {
 			var ajaxstatus = data.status;
