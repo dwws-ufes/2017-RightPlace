@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Rightplace Project DWWS-2017
 by Flávio Machado and Mateus Tassinari
 
@@ -30,3 +31,7 @@ Configure the datasource in WildFly's standalone.xml file:
 In Eclipse, use File > Import > Git > Projects from Git to import the Eclipse project existing in this repository;
 
 You might have to adjust the server settings in the imported project: right-click the Rightplace project and select Properties. In the Server section, select the WildFly 10.x server. In the Targeted Runtimes section, select the WildFly 10.x Runtime;
+=======
+# 2017-RightPlace
+Assignment for the 2017 edition of the "Web Development and the Semantic Web" course, by Flavio Machado and Mateus Tassinari Ferreira
+>>>>>>> refs/remotes/origin/master
