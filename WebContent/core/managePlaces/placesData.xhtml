@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	template="/resources/#{coreInfo.decorator}/decorator.xhtml">
+
+
+	<ui:define name="body">
+	
+		<h:inputText id="name" value="#{showPlace.place.name}" size="30">
+		<f:ajax event="blur" listener="#{showPlace.suggestPlace}" 
+		execute="@this" render="description" />
+		</h:inputText>
+		<script>
+		jsf.ajax.addOnEvent(function(data) {
+			var ajaxstatus = data.status;
+			var ajaxloader = document.getElementById("ajaxloader");
+			switch (ajaxstatus) {
+					case "begin":
+						ajaxloader.style.display = 'block';
+						break;
+					case "complete":
+						ajaxloader.style.display = 'none';
+						break;
+					case "success":
+						break;
+					}
+			});
+		</script>
+		<img id="ajaxloader"
+		src="#{facesContext.externalContext.requestContextPath}/files/images/ajaxloader
+.gif" style="display: none; float: right;" />
+	
+	</ui:define>
+</ui:composition>

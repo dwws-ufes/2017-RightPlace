@@ -1,7 +1,5 @@
 package br.ufes.inf.nemo.marvin.core.application;
 
-
-
 import java.util.Date;
 
 import javax.annotation.security.PermitAll;

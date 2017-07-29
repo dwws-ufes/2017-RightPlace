@@ -1,26 +1,30 @@
 package br.ufes.inf.nemo.marvin.core.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 
 import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Basic;
-import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import br.ufes.inf.nemo.jbutler.ejb.persistence.PersistentObjectSupport;
+import br.ufes.inf.nemo.marvin.people.domain.Person;
 
 
 @Entity
-public class Place extends PersistentObjectSupport{
+public class Place extends PersistentObjectSupport implements Comparable<Place>{
 	
 	private static final long serialVersionUID = 1L;
 
+	@Lob
+	private String description;
+	
 	@Basic
 	@NotNull
 	@Size(max = 20)
@@ -53,7 +57,15 @@ public class Place extends PersistentObjectSupport{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationDate;
 
-
+	public String getDescription (){
+		return description;
+	}
+	public void setDescription(String description){
+		this.description = description;
+		
+	}
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -132,6 +144,21 @@ public class Place extends PersistentObjectSupport{
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
+	 
+
+	/** @see java.lang.Comparable#compareTo(java.lang.Object) */
+	@Override
+	public int compareTo(Place o) {
+		// Compare the persons' names
+		if (name == null) return 1;
+		if (o.name == null) return -1;
+		int cmp = name.compareTo(o.name);
+		if (cmp != 0) return cmp;
+
+		// If it's the same name, check if it's the same entity.
+		return uuid.compareTo(o.uuid);
+	}
+
 
 
 }

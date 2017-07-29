@@ -2,11 +2,23 @@
 	package br.ufes.inf.nemo.marvin.core.controller;
 
 
+import org.apache.jena.query.QueryException;
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.rdf.model.Literal;
 import javax.ejb.EJB;
 	import javax.enterprise.context.SessionScoped;
 	import javax.inject.Named;
 
-	import br.ufes.inf.nemo.jbutler.ejb.application.CrudService;
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.rdf.model.Literal;
+
+import br.ufes.inf.nemo.jbutler.ejb.application.CrudService;
 	import br.ufes.inf.nemo.jbutler.ejb.application.filters.LikeFilter;
 	import br.ufes.inf.nemo.jbutler.ejb.controller.CrudController;
 	import br.ufes.inf.nemo.marvin.core.application.ManagePlacesService;
@@ -19,6 +31,12 @@ import javax.ejb.EJB;
 		/**
 		 * 
 		 */
+		
+		private Place placer = new Place();
+		public Place getPlace(){
+			return placer;
+			}
+		
 		private static final long serialVersionUID = 1L;
 
 		@EJB private ManagePlacesService managePlacesService;
@@ -31,6 +49,26 @@ import javax.ejb.EJB;
 		@Override
 		protected void initFilters() {
 			addFilter(new LikeFilter("managePlaces.filter.byName", "name", getI18nMessage("msgsCore", "managePlaces.text.filter.byName")));		
+		}
+	
+
+		public void suggestPlace(){
+			String name = placer.getName();
+			if(name!=null&& name.length()>3){
+				String query = "PREFIX dbpedia-owl:<http://dbpedia.org/ontology/>"
+						+ "PREFIX dbpprop: <http://dbpedia.org/property/> "
+						+ "SELECT ?desc WHERE {?x a dbpedia-owl:Place; dbprop:name ?name ;dbpedia-owl:altitude ?desc . "
+						+ "FILTER (lcase(str(?name)) = \""+ name.toLowerCase() +"\")FILTER(langMatches(lang(?desc),\"EN\")) }";
+				
+				QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", query);
+				ResultSet results = queryExecution.execSelect();
+				if(results.hasNext()){
+					QuerySolution querySolution = results.next();
+					Literal literal = querySolution.getLiteral("desc");
+					placer.setDescription(""+literal.getValue());
+					
+				}					
+			}
 		}
 	}
 	

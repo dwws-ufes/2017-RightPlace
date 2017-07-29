@@ -48,9 +48,12 @@
 					pt:placeholder="#{msgsCore['managePlaces.form.name.placeholder']}"
 					disabled="#{managePlacesController.readOnly}">
 					<p:ajax event="blur" update="nameField" />
+					<p:ajax event="blur" listener="#{managePlacesController.suggestPlace}" 
+		execute="@this" render="height" />
+					
 				</p:inputText>
 			</ui:decorate>
-		
+					
 					
 			<ui:decorate
 				template="/resources/#{coreInfo.decorator}/formfield.xhtml">
