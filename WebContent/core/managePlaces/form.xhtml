@@ -49,7 +49,7 @@
 					disabled="#{managePlacesController.readOnly}">
 					<p:ajax event="blur" update="nameField" />
 					<p:ajax event="blur" listener="#{managePlacesController.suggestPlace}" 
-		execute="@this" render="height" />
+		execute="@this" update="heightField" />
 					
 				</p:inputText>
 			</ui:decorate>
