@@ -52,27 +52,32 @@ import br.ufes.inf.nemo.jbutler.ejb.application.CrudService;
 		}
 	
 
-		public void suggestPlace(){
-			String name = placer.getName();
-			if(name!=null&& name.length()>3){
-				String query = "PREFIX dbpedia-owl:<http://dbpedia.org/ontology/>"
-						+ "PREFIX dbpprop: <http://dbpedia.org/property/> "
-						+ " SELECT ?name ?x ?code WHERE {?x a dbo:PopulatedPlace; dbprop:name ?name ;dbo:country ?code  }";
-				//		+ "SELECT ?alt WHERE {?x a dbpedia-owl:Place; dbprop:name ?name ;dbpedia-owl:altitude ?alt . "			
-						//+ "FILTER (lcase(str(?name)) = \""+ name.toLowerCase() +"\")FILTER(langMatches(lang(?desc),\"EN\")) }";	
-				
-				QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", query);
-				ResultSet results = queryExecution.execSelect();
-				System.out.println(results);
-				
-				if(results.hasNext()){
-					QuerySolution querySolution = results.next();
-					Literal literal = querySolution.getLiteral("country");
-					placer.setDescription(""+literal.getValue());
-					System.out.println(literal.getValue());
-
-				}					
-			}
-		}
+//		public void suggestPlace(){
+		//			String name = placer.getName();
+		//if(name!=null&& name.length()>3){
+		//	String query = "PREFIX dbpedia-owl:<http://dbpedia.org/ontology/>"
+		//			+ "PREFIX dbpprop: <http://dbpedia.org/property/> "
+		//			+ " SELECT ?name ?x ?code WHERE {?x a dbo:PopulatedPlace; dbprop:name ?name ;dbo:country ?code  }";
+		//	//		+ "SELECT ?alt WHERE {?x a dbpedia-owl:Place; dbprop:name ?name ;dbpedia-owl:altitude ?alt . "			
+		//			//+ "FILTER (lcase(str(?name)) = \""+ name.toLowerCase() +"\")FILTER(langMatches(lang(?desc),\"EN\")) }";	
+		//	
+		//	QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", query);
+		//	
+		//	try{ 
+		//		ResultSet results = queryExecution.execSelect();
+		//	
+		//	System.out.println(results);
+		//	if(results.hasNext()){
+		//		QuerySolution querySolution = results.next();
+		//		Literal literal = querySolution.getLiteral("country");
+		//		placer.setDescription(""+literal.getValue());
+		//		System.out.println(literal.getValue());
+		//	}
+		//	}
+		//	finally {
+		//		queryExecution.close();
+		//			}
+		//}
+		//}
 	}
 	

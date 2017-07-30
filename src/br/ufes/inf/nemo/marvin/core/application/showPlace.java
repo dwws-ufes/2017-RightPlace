@@ -7,6 +7,7 @@ import br.ufes.inf.nemo.marvin.core.domain.Place;
 import br.ufes.inf.nemo.marvin.core.persistence.PlaceDAO;
 
 import java.text.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.*;
 
@@ -43,37 +44,49 @@ public class showPlace {
 	
 	
 	
-	public void suggestPlace(){
-		String name = place.getName();
-		if(name!=null&& name.length()>3){
-			//String query = "PREFIX dbpedia-owl:<http://dbpedia.org/ontology/>"+
-			//"PREFIX dbpprop: <http://dbpedia.org/property/>"+
-			//"SELECT ?desc "+
-			//"WHERE {"+
-			//"?x a dbpedia-owl:Place ; "+
-			//"dbprop:name ?name ; " +
-			//"dbpedia-owl:abstract ?desc . " +
-			//"FILTER (lcase(str(?name)) = \""+ name.toLowerCase() +"\")"+
-			//"FILTER (langMatches(lang(?desc), \"EN\")) "+
-			//"}";
-			String query = "PREFIX dbpedia-owl:<http://dbpedia.org/ontology/>"
-					+ "PREFIX dbpprop: <http://dbpedia.org/property/> "
-					+ "SELECT ?desc WHERE {?x a dbpedia-owl:Place; dbprop:name ?name ;dbpedia-owl:abstract ?desc . "
-					+ "FILTER (lcase(str(?name)) = \""+ name.toLowerCase() +"\")FILTER(langMatches(lang(?desc),\"EN\")) }";
+	public void suggestPlace(String name){
+		List<Place> placeList = new ArrayList<Place>();
+			
+			String query = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>"
+			+ "	PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
+			+" PREFIX foaf: <http://xmlns.com/foaf/0.1/>"
+			+ "PREFIX dbo: <http://dbpedia.org/ontology/>"
+			+ "PREFIX dbp: <http://dbpedia.org/property/>"
+			+ "SELECT DISTINCT ?city_name ?country ?place ?area ?population ?height WHERE {"
+			+ "?place rdf:type <http://dbpedia.org/ontology/PopulatedPlace>."
+			+ "?place foaf:name ?city_name."
+			+ "?place rdfs:comment ?description."
+			+ "?place dbo:areaTotal ?area."
+			+ "?place dbo:populationTotal ?population."
+			+ "?place dbo:country ?country.		"
+			+ "?place dbo:elevation ?height.		"
+			+" 	FILTER (LANG(?description) = 'en' && contains(?city_name, "+ name.toLowerCase() +")) "
+			 +"}"; 
 			
 			QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", query);
-			ResultSet results = queryExecution.execSelect();
+			
+			try{ 
+				ResultSet results = queryExecution.execSelect();
+			
+			System.out.println(results);
 			if(results.hasNext()){
 				QuerySolution querySolution = results.next();
-				Literal literal = querySolution.getLiteral("desc");
-				place.setDescription(""+literal.getValue());
+				Place place = new Place();
+				String city_name = querySolution.get("city_name").toString();
+				String country_name = querySolution.get("country_name").toString();
+			//	long population =  querySolution.get("country_name");
+				String climate = querySolution.get("climate").toString();
+			//	long area =querySolution.get("areaTotal");
+			//	int height = querySolution.get("altitude");
+				Literal literal = querySolution.getLiteral("area");
 				
+				place.setArea(Long.parseLong(""+literal.getValue()));
 			}
-							
-							
-							
+			}
+			finally {
+				queryExecution.close();
+					}
+			}
+													
 		}
-	}
-	
-
 }

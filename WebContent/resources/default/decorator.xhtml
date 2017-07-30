@@ -24,7 +24,25 @@
 
 		<!-- Main Header -->
 		<header class="main-header">
-
+<script>
+		jsf.ajax.addOnEvent(function(data) {
+			var ajaxstatus = data.status;
+			var ajaxloader = document.getElementById("ajaxloader");
+			switch (ajaxstatus) {
+					case "begin":
+						ajaxloader.style.display = 'block';
+						break;
+					case "complete":
+						ajaxloader.style.display = 'none';
+						break;
+					case "success":
+						break;
+					}
+			});
+		</script>
+		<img id="ajaxloader"
+		src="#{facesContext.externalContext.requestContextPath}/files/images/ajaxloader
+.gif" style="display: none; float: right;" />
 			<!-- Logo -->
 			<a href="#{facesContext.externalContext.requestContextPath}/" class="logo"><span class="logo-mini">[<b>M</b>]</span>
 				<h:panelGroup rendered="#{coreInfo.systemInstalled}"><span class="logo-lg"><b>Rightplace</b>@<h:outputText value="#{coreInfo.currentConfig.institutionAcronym}" /></span></h:panelGroup>
