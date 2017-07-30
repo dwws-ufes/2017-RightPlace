@@ -24,6 +24,7 @@ import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.rdf.model.Resource;
 
 @Stateful
 @LocalBean
@@ -42,9 +43,76 @@ public class showPlace {
 	public Place getPlace(){
 		return place;
 	}
+private String searchSSem;
+
+public String getsearchSSem() {
+	System.out.printf("Place:",searchSSem);
+	return searchSSem;
+}
+public void setsearchSSem(String searchSSem) {
+	System.out.println("SET");
+	this.searchSSem = searchSSem;
+	System.out.printf("Place:",searchSSem);
+}
+
 	
+public String searchSemantic(){
+	System.out.println("Podcast Semantic");
+	System.out.println(getsearchSSem());
+	if(searchSSem == null || searchSSem.equals("")){
+		System.out.println("vazio");
+	}else{
+		System.out.println(searchSSem);
+	  
+		if(searchSSem == null || searchSSem.equals("")){
+
+		}else{
+		
+			String query = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>"
+					+ "	PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
+					+" PREFIX foaf: <http://xmlns.com/foaf/0.1/>"
+					+ "PREFIX dbo: <http://dbpedia.org/ontology/>"
+					+ "PREFIX dbp: <http://dbpedia.org/property/>"
+					+ "SELECT DISTINCT ?city_name ?country ?place ?area ?population ?height WHERE {"
+					+ "?place rdf:type <http://dbpedia.org/ontology/PopulatedPlace>."
+					+ "?place foaf:name ?city_name."
+					+ "?place rdfs:comment ?description."
+					+ "?place dbo:areaTotal ?area."
+					+ "?place dbo:populationTotal ?population."
+					+ "?place dbo:country ?country.		"
+					+ "?place dbo:elevation ?height.		"
+					+" 	FILTER (LANG(?description) = 'en' && contains(?city_name,\""+ searchSSem +"\"))\n "
+					 +"}"; 
+			QueryExecution queryExecution = 
+			QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", query);
+			ResultSet results = queryExecution.execSelect();
+		    System.out.println("query feita");
+
+
+			while (results.hasNext()) {
+				
+				QuerySolution querySolution = results.next();
+				//System.out.println(querySolution);
+				Resource name = (Resource) querySolution.get("city_name");
+			    System.out.println("city_name: "+name.getURI());
+			    Literal country = querySolution.getLiteral("country");
+				System.out.println("country::"+country.getValue());
+				Literal literalDesc = querySolution.getLiteral("description");
+				System.out.println("Description:"+literalDesc.getValue());
+		
+		  }
+			
+		}
+	}
+	return null;
+}
+
+
+
+
+
 //	public void suggestPlace(String name){
-	public String suggestPlace(){
+	public void suggestPlace(){
 		
 		String searchName = searchString;
 
@@ -52,8 +120,8 @@ public class showPlace {
 		if(searchName == null || searchName.equals("")){
 						System.out.println("vazio");
 		}else{
-//			System.out.println("Entrar nesse ponto");
-	//		System.out.println(searchName);
+			System.out.println("Entra pesquisando: \n");
+			System.out.println(searchName);
 	//	List<Place> placeList = new ArrayList<Place>();
 	//	Place place = new Place();
 	//String searchName = place.getName();
@@ -106,7 +174,8 @@ public class showPlace {
 					}
 		
 			}		
-		return null;
+		return ;
 
 	}
 }
+
