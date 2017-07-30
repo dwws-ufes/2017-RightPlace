@@ -45,7 +45,7 @@ public class Place extends PersistentObjectSupport implements Comparable<Place>{
 	private long population;
 
 	@Basic
-	private int height;
+	private long height;
 
 	@Basic
 	private String climate;
@@ -116,13 +116,13 @@ public class Place extends PersistentObjectSupport implements Comparable<Place>{
 	}
 
 
-	public int getHeight() {
+	public long getHeight() {
 		return height;
 	}
 
 
-	public void setHeight(int height) {
-		this.height = height;
+	public void setHeight(long height2) {
+		this.height = height2;
 	}
 
 

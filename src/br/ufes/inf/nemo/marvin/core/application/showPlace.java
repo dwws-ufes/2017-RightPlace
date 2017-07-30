@@ -30,12 +30,12 @@ import org.apache.jena.rdf.model.Literal;
 @Model
 public class showPlace {
 	
-	private List<Place> places;
+	private List<Place> placeList;
 	
 	private Place place = new Place();
 	
 	public List<Place> getPlaces(){
-		return places;
+		return placeList;
 	}
 	
 	public Place getPlace(){
@@ -45,8 +45,9 @@ public class showPlace {
 	
 	
 	public void suggestPlace(String name){
-		List<Place> placeList = new ArrayList<Place>();
-			
+	//	List<Place> placeList = new ArrayList<Place>();
+		Place place = new Place();
+
 			String query = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>"
 			+ "	PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
 			+" PREFIX foaf: <http://xmlns.com/foaf/0.1/>"
@@ -71,16 +72,20 @@ public class showPlace {
 			System.out.println(results);
 			if(results.hasNext()){
 				QuerySolution querySolution = results.next();
-				Place place = new Place();
+		//		Place place = new Place();
 				String city_name = querySolution.get("city_name").toString();
 				String country_name = querySolution.get("country_name").toString();
-			//	long population =  querySolution.get("country_name");
-				String climate = querySolution.get("climate").toString();
-			//	long area =querySolution.get("areaTotal");
-			//	int height = querySolution.get("altitude");
-				Literal literal = querySolution.getLiteral("area");
-				
-				place.setArea(Long.parseLong(""+literal.getValue()));
+		//		String climate = querySolution.get("climate").toString();
+				Literal population =  querySolution.getLiteral("country_name");
+				Literal height = querySolution.getLiteral("altitude");
+				Literal area = querySolution.getLiteral("area");
+
+				place.setName(city_name);
+				place.setName(country_name);
+//				place.setClimate(climate);
+				place.setHeight(height.getLong());
+				place.setArea(area.getLong());
+				place.setPopulation(population.getLong());
 			}
 			}
 			finally {
@@ -88,5 +93,5 @@ public class showPlace {
 					}
 			}
 													
-		}
+		
 }
