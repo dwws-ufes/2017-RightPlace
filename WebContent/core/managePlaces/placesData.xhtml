@@ -14,12 +14,16 @@
 	
 	
 	<h:panelGroup id ="showPlacesPannel">
-						<p>
-						<h:outputText value= "Buscar Lugar"/>
-						<h:inputText id="showSemantic" value ="#{showPlaces.searchSSem}"/>
-						<h:commandButton value="Buscar"  action="#{showPlaces.searchSemantic}"/>
+						<p>	
+						<h:form> 
+			<h:outputText value="Buscar Lugar"/>
+    <p:inputText value="#{showPlace.searchString}"/> 
+    <p:commandButton value="Submit" action="#{showPlace.suggestPlace}"/> 
+	</h:form> 
+						
 						</p>
 					</h:panelGroup>
+	
 	</ui:define>
 	
 </ui:composition>

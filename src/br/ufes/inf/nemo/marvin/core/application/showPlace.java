@@ -31,96 +31,41 @@ import org.apache.jena.rdf.model.Resource;
 @Model
 public class showPlace {
 	
-	private List<Place> placeList;
-	public String searchString;
-	
+	private List<Place>  placeList;
 	private Place place = new Place();
+	private String searchString;
 	
 	public List<Place> getPlaces(){
 		return placeList;
 	}
 	
+	public void setPlace( Place place){
+		this.place  = place;
+	}
 	public Place getPlace(){
 		return place;
 	}
-private String searchSSem;
 
-public String getsearchSSem() {
-	System.out.printf("Place:",searchSSem);
-	return searchSSem;
-}
-public void setsearchSSem(String searchSSem) {
-	System.out.println("SET");
-	this.searchSSem = searchSSem;
-	System.out.printf("Place:",searchSSem);
-}
-
-	
-public String searchSemantic(){
-	System.out.println("Podcast Semantic");
-	System.out.println(getsearchSSem());
-	if(searchSSem == null || searchSSem.equals("")){
-		System.out.println("vazio");
-	}else{
-		System.out.println(searchSSem);
-	  
-		if(searchSSem == null || searchSSem.equals("")){
-
-		}else{
-		
-			String query = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>"
-					+ "	PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
-					+" PREFIX foaf: <http://xmlns.com/foaf/0.1/>"
-					+ "PREFIX dbo: <http://dbpedia.org/ontology/>"
-					+ "PREFIX dbp: <http://dbpedia.org/property/>"
-					+ "SELECT DISTINCT ?city_name ?country ?place ?area ?population ?height WHERE {"
-					+ "?place rdf:type <http://dbpedia.org/ontology/PopulatedPlace>."
-					+ "?place foaf:name ?city_name."
-					+ "?place rdfs:comment ?description."
-					+ "?place dbo:areaTotal ?area."
-					+ "?place dbo:populationTotal ?population."
-					+ "?place dbo:country ?country.		"
-					+ "?place dbo:elevation ?height.		"
-					+" 	FILTER (LANG(?description) = 'en' && contains(?city_name,\""+ searchSSem +"\"))\n "
-					 +"}"; 
-			QueryExecution queryExecution = 
-			QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", query);
-			ResultSet results = queryExecution.execSelect();
-		    System.out.println("query feita");
-
-
-			while (results.hasNext()) {
-				
-				QuerySolution querySolution = results.next();
-				//System.out.println(querySolution);
-				Resource name = (Resource) querySolution.get("city_name");
-			    System.out.println("city_name: "+name.getURI());
-			    Literal country = querySolution.getLiteral("country");
-				System.out.println("country::"+country.getValue());
-				Literal literalDesc = querySolution.getLiteral("description");
-				System.out.println("Description:"+literalDesc.getValue());
-		
-		  }
-			
-		}
+	public void setSearchString(String search) {
+		this.searchString =search ;
+		System.out.println("set search");
 	}
-	return null;
-}
+	public String getSearchString(){
+		System.out.println("get search");
+		return searchString;
+	};
 
 
+	public String suggestPlace(){
+		System.out.println("teste");
 
-
-
-//	public void suggestPlace(String name){
-	public void suggestPlace(){
-		
-		String searchName = searchString;
-
-		System.out.println("suggest Place chamado");
+		String searchName = getSearchString();
+		System.out.println(searchString);
+		System.out.println(searchName);		
 		if(searchName == null || searchName.equals("")){
 						System.out.println("vazio");
 		}else{
-			System.out.println("Entra pesquisando: \n");
+			System.out.println("Entra pesquisando:");
 			System.out.println(searchName);
 	//	List<Place> placeList = new ArrayList<Place>();
 	//	Place place = new Place();
@@ -140,11 +85,13 @@ public String searchSemantic(){
 			+ "?place dbo:elevation ?height.		"
 			+" 	FILTER (LANG(?description) = 'en' && contains(?city_name,\""+ searchName +"\"))\n "
 			 +"}"; 
-			
+			System.out.println("query definida");
 			QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", query);
-//			System.out.println("query feita");
+			System.out.println("query feita");
 
 			try{ 
+
+				System.out.println("resultados obtidos");
 				ResultSet results = queryExecution.execSelect();
 			
 			if(results.hasNext()){
@@ -174,7 +121,7 @@ public String searchSemantic(){
 					}
 		
 			}		
-		return ;
+		return null;
 
 	}
 }
