@@ -31,6 +31,7 @@ import org.apache.jena.rdf.model.Literal;
 public class showPlace {
 	
 	private List<Place> placeList;
+	public String searchString;
 	
 	private Place place = new Place();
 	
@@ -42,12 +43,20 @@ public class showPlace {
 		return place;
 	}
 	
-	
-	
-	public void suggestPlace(String name){
-	//	List<Place> placeList = new ArrayList<Place>();
-		Place place = new Place();
+//	public void suggestPlace(String name){
+	public String suggestPlace(){
+		
+		String searchName = searchString;
 
+		System.out.println("suggest Place chamado");
+		if(searchName == null || searchName.equals("")){
+						System.out.println("vazio");
+		}else{
+//			System.out.println("Entrar nesse ponto");
+	//		System.out.println(searchName);
+	//	List<Place> placeList = new ArrayList<Place>();
+	//	Place place = new Place();
+	//String searchName = place.getName();
 			String query = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>"
 			+ "	PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
 			+" PREFIX foaf: <http://xmlns.com/foaf/0.1/>"
@@ -61,16 +70,18 @@ public class showPlace {
 			+ "?place dbo:populationTotal ?population."
 			+ "?place dbo:country ?country.		"
 			+ "?place dbo:elevation ?height.		"
-			+" 	FILTER (LANG(?description) = 'en' && contains(?city_name, "+ name.toLowerCase() +")) "
+			+" 	FILTER (LANG(?description) = 'en' && contains(?city_name,\""+ searchName +"\"))\n "
 			 +"}"; 
 			
 			QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql", query);
-			
+//			System.out.println("query feita");
+
 			try{ 
 				ResultSet results = queryExecution.execSelect();
 			
-			System.out.println(results);
 			if(results.hasNext()){
+				System.out.println("resultado:");
+
 				QuerySolution querySolution = results.next();
 		//		Place place = new Place();
 				String city_name = querySolution.get("city_name").toString();
@@ -86,12 +97,16 @@ public class showPlace {
 				place.setHeight(height.getLong());
 				place.setArea(area.getLong());
 				place.setPopulation(population.getLong());
+				System.out.println(querySolution.get("city_name").toString());
+
 			}
 			}
 			finally {
 				queryExecution.close();
 					}
-			}
-													
 		
+			}		
+		return null;
+
+	}
 }

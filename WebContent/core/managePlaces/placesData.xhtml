@@ -12,28 +12,14 @@
 
 	<ui:define name="body">
 	
-		<h:inputText id="name" value="#{showPlace.place.name}" size="30">
-		<f:ajax event="blur" listener="#{showPlace.suggestPlace}" 
-		execute="@this" render="placeFound" />
-		</h:inputText>
-		<h:outputText id ="nameOut" value="#{showPlace.place.name}" size="30"></h:outputText>
-	<h:form id="placeFound">
-			<p>
-				<h:outputText value="No places found yet." size="30" />
-				<h:dataTable value="#{showPlace.place.name}" var="name"  border="1" cellspacing="0">
-					<h:column>
-						<f:facet name="header">Name</f:facet>
-						<h:outputText value="#{showPlace.suggestPlace(place.name)}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">begin</f:facet>
-					</h:column>
-					<h:column>
-						<f:facet name="header">End</f:facet>
-					</h:column>
-				</h:dataTable>
-			</p>
-		</h:form>
 	
+	<h:panelGroup id ="showPlacesPannel">
+						<p>
+						<h:outputText value= "Buscar Lugar"/>
+						<h:inputText id="showSemantic" value ="#{showPlaces.searchString}"/>
+						<h:commandButton value="Buscar"  action="#{showPlaces.suggestPlace}"/>
+						</p>
+					</h:panelGroup>
 	</ui:define>
+	
 </ui:composition>
