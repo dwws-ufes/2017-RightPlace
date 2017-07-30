@@ -12,8 +12,8 @@
 
 	<ui:define name="body">
 	
-		<h:inputText id="name" value="#{showPlace.place.name}" size="30">
-		<f:ajax event="blur" listener="#{showPlace.suggestPlace}" 
+		<h:inputText id="name" value="#{managePlacesController.place.name}" size="30">
+		<f:ajax event="blur" listener="#{managePlacesController.suggestPlace}" 
 		execute="@this" render="description" />
 		
 		</h:inputText>
