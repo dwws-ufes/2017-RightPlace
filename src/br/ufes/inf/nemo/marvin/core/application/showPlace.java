@@ -104,7 +104,7 @@ public String suggestPlace(){
 			+ "PREFIX dbo: <http://dbpedia.org/ontology/>"
 			+ "PREFIX dbp: <http://dbpedia.org/property/>"
 	//		+ "SELECT DISTINCT ?city_name ?country ?place ?area ?population ?height WHERE {"
-			+ "SELECT DISTINCT ?city_name ?country_name ?place  WHERE {"
+			+ "SELECT DISTINCT ?city_name ?description ?country_name ?place  WHERE {"
 			+ "?place rdf:type <http://dbpedia.org/ontology/PopulatedPlace>."
 			+ "?place foaf:name ?city_name."
 			+ "?place rdfs:comment ?description."
@@ -122,11 +122,11 @@ public String suggestPlace(){
 				System.out.println("executando query na dbpedia:");
 				ResultSet results = queryExecution.execSelect();
 				System.out.println("resultados obtidos");
-			if(results.hasNext()){
+			//if(results.hasNext()){
 				System.out.println("resultado:");
 				//sessionPlace.savePlaceSearch(results);
 				saveSuggestion(results);
-				
+				//debug
 				QuerySolution querySolution = results.next();
 				String city_name = querySolution.get("city_name").toString();
 				String country_name = querySolution.get("country_name").toString();
@@ -143,7 +143,7 @@ public String suggestPlace(){
 
 		//		System.out.println(querySolution.get("country_name").toString());	
 				
-				}
+				//}
 			}
 			finally {
 				queryExecution.close();

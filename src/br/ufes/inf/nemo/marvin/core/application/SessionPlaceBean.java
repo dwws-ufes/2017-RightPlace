@@ -49,19 +49,19 @@ public class SessionPlaceBean implements SessionPlace {
 		String country_name = querySolution.get("country_name").toString();
 		String description = querySolution.get("description").toString();
 		
-		String climate = querySolution.get("climate").toString();
-		Literal population =  querySolution.getLiteral("population");
-		Literal height = querySolution.getLiteral("height");
-		Literal area = querySolution.getLiteral("area");
+	//	String climate = querySolution.get("climate").toString();
+	//	Literal population =  querySolution.getLiteral("population");
+		//	Literal height = querySolution.getLiteral("height");
+		//	Literal area = querySolution.getLiteral("area");
 
 		place.setName(city_name);
 		place.setCountry(country_name);
 		place.setDescription(description);
 		
-		place.setClimate(climate);
-		place.setHeight(height.getLong());
-		place.setArea(area.getLong());
-		place.setPopulation(population.getLong());
+		//place.setClimate(climate);
+		//place.setHeight(height.getLong());
+		//place.setArea(area.getLong());
+		//place.setPopulation(population.getLong());
 		
 		placeDAO.save(place);
 
