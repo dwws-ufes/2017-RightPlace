@@ -50,8 +50,7 @@ import br.ufes.inf.nemo.jbutler.ejb.application.CrudService;
 		protected void initFilters() {
 			addFilter(new LikeFilter("managePlaces.filter.byName", "name", getI18nMessage("msgsCore", "managePlaces.text.filter.byName")));		
 		}
-	
-
+		
 //		public void suggestPlace(){
 		//			String name = placer.getName();
 		//if(name!=null&& name.length()>3){

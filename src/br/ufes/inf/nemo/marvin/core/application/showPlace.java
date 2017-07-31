@@ -19,6 +19,7 @@ import javax.enterprise.inject.New;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import org.apache.jena.query.QueryException;
 import org.apache.jena.query.QueryExecution;
@@ -37,6 +38,7 @@ public class showPlace {
 	private Place place = new Place();
 	private String searchString;
 	
+	@EJB private SessionPlace sessionPlace; 
 	
 	@EJB
 	private PlaceDAO placeDAO ;
@@ -61,27 +63,53 @@ public class showPlace {
 		return searchString;
 	};
 
+public String saveSuggestion(ResultSet results){
+	if (results == null){
+	
+	String searchName = getSearchString();
+	place.setName(searchName);
+	place.setCountry("exemplo");
+	place.setDescription("description exemplo");
+	System.out.println("Place name:" + place.getName());
+	System.out.println("Place description:" + place.getDescription());
+	sessionPlace.saveTestSearch(place.getName(),place.getDescription());
+	}
+	else{
+		sessionPlace.savePlaceSearch(results);
+	}
+return null;
+	}
+public String saveSuggestion(){
+	String searchName = getSearchString();
+	place.setName(searchName);
+	place.setCountry("País");
+	place.setDescription("description exemplo");
+	System.out.println("Place name:" + place.getName());
+	System.out.println("Place description:" + place.getDescription());
+	sessionPlace.saveTestSearch(place.getName(),place.getDescription());
+return null;
+	}
 
-	public String suggestPlace(){
+public String suggestPlace(){
 		System.out.println("teste");
-
+//		place = new Place();
 		String searchName = getSearchString();
-		//System.out.println(searchString);
+		
 	//	System.out.println(searchName);		
-		place.setName(searchString);
-		placeDAO.save(place);
+	//	place.setName(searchName);
+	//	place.setCountry("País exemplo");
+	//	place.setDescription("description exemplo");
+	//	System.out.println("Place name:" + place.getName());
+	//	System.out.println("Place description:" + place.getDescription());
 
-		System.out.println("Place name:" + place.getName());
+//		sessionPlace.saveTestSearch(place.getName(),place.getCountry());
 		if(searchName == null || searchName.equals("")){
 						System.out.println("vazio");
 		}else{
 			System.out.println("Entra pesquisando:");
 			System.out.println(searchName);
 
-	//	List<Place> placeList = new ArrayList<Place>();
-	//	Place place = new Place();
-	//String searchName = place.getName();
-			String query = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>"
+		String query = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>"
 			+ "	PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
 			+" PREFIX foaf: <http://xmlns.com/foaf/0.1/>"
 			+ "PREFIX dbo: <http://dbpedia.org/ontology/>"
@@ -107,7 +135,9 @@ public class showPlace {
 				System.out.println("resultados obtidos");
 //			if(results.hasNext()){
 				System.out.println("resultado:");
-
+				//sessionPlace.savePlaceSearch(results);
+				saveSuggestion(results);
+				
 				QuerySolution querySolution = results.next();
 				String city_name = querySolution.get("city_name").toString();
 				String country_name = querySolution.get("country_name").toString();
@@ -125,14 +155,14 @@ public class showPlace {
 		//		place.setHeight(height.getLong());
 		//		place.setArea(area.getLong());
 		//		place.setPopulation(population.getLong());
-				placeDAO.save(place);
 
 				System.out.println("place.country" + place.getCountry());				
 				System.out.println(querySolution.get("country_name").toString());	
-
+				
 			//}
 			}
 			finally {
+				//place = new Place();
 				queryExecution.close();
 					}
 		
