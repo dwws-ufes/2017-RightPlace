@@ -64,21 +64,10 @@ public class showPlace {
 	};
 
 public String saveSuggestion(ResultSet results){
-	if (results == null){
-	
-	String searchName = getSearchString();
-	place.setName(searchName);
-	place.setCountry("exemplo");
-	place.setDescription("description exemplo");
-	System.out.println("Place name:" + place.getName());
-	System.out.println("Place description:" + place.getDescription());
-	sessionPlace.saveTestSearch(place.getName(),place.getDescription());
-	}
-	else{
 		sessionPlace.savePlaceSearch(results);
+		return null;
 	}
-return null;
-	}
+
 public String saveSuggestion(){
 	String searchName = getSearchString();
 	place.setName(searchName);
@@ -133,7 +122,7 @@ public String suggestPlace(){
 				System.out.println("executando query na dbpedia:");
 				ResultSet results = queryExecution.execSelect();
 				System.out.println("resultados obtidos");
-//			if(results.hasNext()){
+			if(results.hasNext()){
 				System.out.println("resultado:");
 				//sessionPlace.savePlaceSearch(results);
 				saveSuggestion(results);
@@ -143,26 +132,20 @@ public String suggestPlace(){
 				String country_name = querySolution.get("country_name").toString();
 				String description = querySolution.get("description").toString();
 				
-		//		String climate = querySolution.get("climate").toString();
-		//		Literal population =  querySolution.getLiteral("population");
-		//		Literal height = querySolution.getLiteral("height");
-		//		Literal area = querySolution.getLiteral("area");
-
+		
 				place.setName(city_name);
 				place.setCountry(country_name);
 				place.setDescription(country_name);
-//				place.setClimate(climate);
-		//		place.setHeight(height.getLong());
-		//		place.setArea(area.getLong());
-		//		place.setPopulation(population.getLong());
-
-				System.out.println("place.country" + place.getCountry());				
-				System.out.println(querySolution.get("country_name").toString());	
 				
-			//}
+				System.out.println("place.name:" + place.getName());				
+				System.out.println("place.country:" + place.getCountry());
+				System.out.println("place.description:" + place.getDescription());				
+
+		//		System.out.println(querySolution.get("country_name").toString());	
+				
+				}
 			}
 			finally {
-				//place = new Place();
 				queryExecution.close();
 					}
 		
