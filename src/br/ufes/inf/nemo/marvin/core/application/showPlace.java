@@ -60,8 +60,11 @@ public class showPlace {
 		System.out.println("teste");
 
 		String searchName = getSearchString();
-		System.out.println(searchString);
-		System.out.println(searchName);		
+		//System.out.println(searchString);
+	//	System.out.println(searchName);		
+		place.setName(searchString);
+		
+		System.out.println("Place name:" + place.getName());
 		if(searchName == null || searchName.equals("")){
 						System.out.println("vazio");
 		}else{
@@ -75,14 +78,15 @@ public class showPlace {
 			+" PREFIX foaf: <http://xmlns.com/foaf/0.1/>"
 			+ "PREFIX dbo: <http://dbpedia.org/ontology/>"
 			+ "PREFIX dbp: <http://dbpedia.org/property/>"
-			+ "SELECT DISTINCT ?city_name ?country ?place ?area ?population ?height WHERE {"
+	//		+ "SELECT DISTINCT ?city_name ?country ?place ?area ?population ?height WHERE {"
+			+ "SELECT DISTINCT ?city_name ?country_name ?place  WHERE {"
 			+ "?place rdf:type <http://dbpedia.org/ontology/PopulatedPlace>."
 			+ "?place foaf:name ?city_name."
 			+ "?place rdfs:comment ?description."
-			+ "?place dbo:areaTotal ?area."
-			+ "?place dbo:populationTotal ?population."
-			+ "?place dbo:country ?country.		"
-			+ "?place dbo:elevation ?height.		"
+			//+ "?place dbo:areaTotal ?area."
+			//+ "?place dbo:populationTotal ?population."
+			+ "?place dbo:country ?country_name.		"
+			//+ "?place dbo:elevation ?height.		"
 			+" 	FILTER (LANG(?description) = 'en' && contains(?city_name,\""+ searchName +"\"))\n "
 			 +"}"; 
 			System.out.println("query definida");
@@ -90,28 +94,27 @@ public class showPlace {
 			System.out.println("query feita");
 
 			try{ 
-
-				System.out.println("resultados obtidos");
+				System.out.println("executando query na dbpedia:");
 				ResultSet results = queryExecution.execSelect();
-			
+				System.out.println("resultados obtidos");
+
 			if(results.hasNext()){
 				System.out.println("resultado:");
 
 				QuerySolution querySolution = results.next();
-		//		Place place = new Place();
 				String city_name = querySolution.get("city_name").toString();
 				String country_name = querySolution.get("country_name").toString();
 		//		String climate = querySolution.get("climate").toString();
-				Literal population =  querySolution.getLiteral("country_name");
-				Literal height = querySolution.getLiteral("altitude");
-				Literal area = querySolution.getLiteral("area");
+		//		Literal population =  querySolution.getLiteral("population");
+		//		Literal height = querySolution.getLiteral("height");
+		//		Literal area = querySolution.getLiteral("area");
 
 				place.setName(city_name);
 				place.setName(country_name);
 //				place.setClimate(climate);
-				place.setHeight(height.getLong());
-				place.setArea(area.getLong());
-				place.setPopulation(population.getLong());
+		//		place.setHeight(height.getLong());
+		//		place.setArea(area.getLong());
+		//		place.setPopulation(population.getLong());
 				System.out.println(querySolution.get("city_name").toString());
 
 			}

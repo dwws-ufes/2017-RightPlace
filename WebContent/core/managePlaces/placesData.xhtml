@@ -13,15 +13,24 @@
 	<ui:define name="body">
 	
 	
-	<h:panelGroup id ="showPlacesPannel">
-						<p>	
 						<h:form> 
-			<h:outputText value="Buscar Lugar"/>
-    <p:inputText value="#{showPlace.searchString}"/> 
-    <p:commandButton value="Submit" action="#{showPlace.suggestPlace}"/> 
+			<h:outputText value="Buscar Lugar na DBpedia"/>
+    <p:inputText value="#{showPlace.searchString}">
+    </p:inputText>
+    
+    <p:commandButton value="Submit" action="#{showPlace.suggestPlace}"/>
+     
 	</h:form> 
-						
+	
+	<h:panelGroup id ="showPlacesPannel">					
+						<p>	
+						<h:outputText value="Cidade: #{showPlace.place.name}">
+					    <f:ajax event="blur" listener ="#{showPlace.suggestPlace}" render="showPlacesPannel"/> 
+						</h:outputText>
 						</p>
+						<p>	
+						<h:outputText value="País:#{showPlace.place.country}"/>
+						</p>    				
 					</h:panelGroup>
 	
 	</ui:define>
