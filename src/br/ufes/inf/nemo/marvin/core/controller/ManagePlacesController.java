@@ -32,9 +32,9 @@ import br.ufes.inf.nemo.jbutler.ejb.application.CrudService;
 		 * 
 		 */
 		
-		private Place placer = new Place();
+		private Place place = new Place();
 		public Place getPlace(){
-			return placer;
+			return place;
 			}
 		
 		private static final long serialVersionUID = 1L;

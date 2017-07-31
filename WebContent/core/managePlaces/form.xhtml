@@ -47,19 +47,17 @@
 					required="true"
 					pt:placeholder="#{msgsCore['managePlaces.form.name.placeholder']}"
 					disabled="#{managePlacesController.readOnly}">
-					<p:ajax event="blur" update="nameField" />
-					
+					<p:ajax event="blur" update="countryField" />
 				</p:inputText>
 			</ui:decorate>
-					
-					
+			
 			<ui:decorate
 				template="/resources/#{coreInfo.decorator}/formfield.xhtml">
 				<ui:param name="fieldName" value="country" />
 				<ui:param name="label" value="#{msgsCore['managePlaces.form.country']}" />
 				<p:inputText id="country"
 					value="#{managePlacesController.selectedEntity.country}"
-					required="true"
+					required="false"
 					pt:placeholder="#{msgsCore['managePlaces.form.country.placeholder']}"
 					disabled="#{managePlacesController.readOnly}">
 					<p:ajax event="blur" update="countryField" />
@@ -125,6 +123,19 @@
 					value="#{managePlacesController.selectedEntity.climate}"
 					required="false"
 					pt:placeholder="#{msgsCore['managePlaces.form.climate.placeholder']}"
+					disabled="#{managePlacesController.readOnly}">
+				</p:inputText>
+			</ui:decorate>
+			
+				<ui:decorate
+				template="/resources/#{coreInfo.decorator}/formfield.xhtml">
+				<ui:param name="fieldName" value="description" />
+				<ui:param name="label"
+					value="#{msgsCore['managePlaces.form.description']}" />
+				<p:inputText id="description"
+					value="#{managePlacesController.selectedEntity.description}"
+					required="false"
+					pt:placeholder="#{msgsCore['managePlaces.form.description.placeholder']}"
 					disabled="#{managePlacesController.readOnly}">
 				</p:inputText>
 			</ui:decorate>

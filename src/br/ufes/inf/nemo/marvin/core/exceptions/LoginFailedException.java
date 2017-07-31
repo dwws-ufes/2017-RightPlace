@@ -1,11 +1,6 @@
 package br.ufes.inf.nemo.marvin.core.exceptions;
 
-/**
- * Application exception that represents the fact that the user could not be authenticated.
- * 
- * @author Vitor E. Silva Souza (vitorsouza@gmail.com)
- * @version 1.0
- */
+
 public class LoginFailedException extends Exception {
 	/** Serialization id. */
 	private static final long serialVersionUID = 1L;

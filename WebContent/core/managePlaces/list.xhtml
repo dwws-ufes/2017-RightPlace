@@ -30,6 +30,9 @@
 					<p:commandButton action="#{managePlacesController.filter}" value="#{msgs['jbutler.crud.button.filter']}" process="@form" update=":listingForm @form" icon="fa fa-fw fa-search" />
 					<p:commandButton action="#{managePlacesController.cancelFilter}" value="#{msgs['jbutler.crud.button.cancelFilter']}" process="@form" update=":listingForm @form" icon="fa fa-fw fa-close" rendered="#{managePlacesController.filtering}" />
 					<p:commandButton action="#{managePlacesController.clearFilter}" value="#{msgs['jbutler.crud.button.clearFilter']}" process="@form" update=":listingForm @form" icon="fa fa-fw fa-eraser" rendered="#{not managePlacesController.filtering}" />
+						<a style="float: right;" 
+href="#{facesContext.externalContext.requestContextPath}/data/places">RDF
+/XML</a>
 				</ui:decorate>
 				<p:hotkey bind="#{msgs['jbutler.crud.hotkey.filterFocus']}" handler="if (findObjectById('filterForm:filterText') != null) findObjectById('filterForm:filterText').focus(); else findObjectById('filterForm:filterSelect').focus();" />
 				<p:hotkey bind="#{msgs['jbutler.crud.hotkey.clearFilter']}" action="#{managePlacesController.cancelFilter}" process="@form" update=":listingForm @form" rendered="#{managePlacesController.filtering}" />
@@ -78,6 +81,10 @@
 				<p:column headerText="#{msgsCore['managePlaces.form.climate']}">
 					<h:outputText value="#{entity.climate}" />
 				</p:column>
+				<p:column headerText="#{msgsCore['managePlaces.form.description']}">
+					<h:outputText value="#{entity.description}" />
+				</p:column>
+				
 				<p:ajax event="rowSelect" update=":listingForm:buttonsGroup" />
 				<p:ajax event="rowUnselect" update=":listingForm:buttonsGroup" />
 			</p:dataTable>

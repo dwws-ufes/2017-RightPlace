@@ -16,12 +16,7 @@ import br.ufes.inf.nemo.jbutler.ejb.persistence.exceptions.PersistentObjectNotFo
 import br.ufes.inf.nemo.marvin.core.domain.Place;
 import br.ufes.inf.nemo.marvin.core.domain.Place_;
 
-/**
- * TODO: document this type.
- *
- * @author Vítor E. Silva Souza (vitorsouza@gmail.com)
- * @version 1.0
- */
+
 @Stateless
 public class PlaceJPADAO extends BaseJPADAO<Place> implements PlaceDAO {
 	/** Serialization id. */

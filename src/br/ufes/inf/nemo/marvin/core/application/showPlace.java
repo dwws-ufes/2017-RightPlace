@@ -3,6 +3,8 @@ package br.ufes.inf.nemo.marvin.core.application;
 
 import br.ufes.inf.nemo.marvin.core.domain.User;
 import br.ufes.inf.nemo.marvin.core.persistence.UserDAO;
+import br.ufes.inf.nemo.jbutler.ejb.application.CrudService;
+import br.ufes.inf.nemo.marvin.core.controller.ManagePlacesController;
 import br.ufes.inf.nemo.marvin.core.domain.Place;
 import br.ufes.inf.nemo.marvin.core.persistence.PlaceDAO;
 
@@ -35,6 +37,10 @@ public class showPlace {
 	private Place place = new Place();
 	private String searchString;
 	
+	
+	@EJB
+	private PlaceDAO placeDAO ;
+	
 	public List<Place> getPlaces(){
 		return placeList;
 	}
@@ -63,13 +69,15 @@ public class showPlace {
 		//System.out.println(searchString);
 	//	System.out.println(searchName);		
 		place.setName(searchString);
-		
+		placeDAO.save(place);
+
 		System.out.println("Place name:" + place.getName());
 		if(searchName == null || searchName.equals("")){
 						System.out.println("vazio");
 		}else{
 			System.out.println("Entra pesquisando:");
 			System.out.println(searchName);
+
 	//	List<Place> placeList = new ArrayList<Place>();
 	//	Place place = new Place();
 	//String searchName = place.getName();
@@ -97,27 +105,32 @@ public class showPlace {
 				System.out.println("executando query na dbpedia:");
 				ResultSet results = queryExecution.execSelect();
 				System.out.println("resultados obtidos");
-
-			if(results.hasNext()){
+//			if(results.hasNext()){
 				System.out.println("resultado:");
 
 				QuerySolution querySolution = results.next();
 				String city_name = querySolution.get("city_name").toString();
 				String country_name = querySolution.get("country_name").toString();
+				String description = querySolution.get("description").toString();
+				
 		//		String climate = querySolution.get("climate").toString();
 		//		Literal population =  querySolution.getLiteral("population");
 		//		Literal height = querySolution.getLiteral("height");
 		//		Literal area = querySolution.getLiteral("area");
 
 				place.setName(city_name);
-				place.setName(country_name);
+				place.setCountry(country_name);
+				place.setDescription(country_name);
 //				place.setClimate(climate);
 		//		place.setHeight(height.getLong());
 		//		place.setArea(area.getLong());
 		//		place.setPopulation(population.getLong());
-				System.out.println(querySolution.get("city_name").toString());
+				placeDAO.save(place);
 
-			}
+				System.out.println("place.country" + place.getCountry());				
+				System.out.println(querySolution.get("country_name").toString());	
+
+			//}
 			}
 			finally {
 				queryExecution.close();

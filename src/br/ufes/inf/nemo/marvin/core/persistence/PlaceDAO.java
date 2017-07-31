@@ -7,12 +7,7 @@ import br.ufes.inf.nemo.jbutler.ejb.persistence.exceptions.MultiplePersistentObj
 import br.ufes.inf.nemo.jbutler.ejb.persistence.exceptions.PersistentObjectNotFoundException;
 import br.ufes.inf.nemo.marvin.core.domain.Place;
 
-/**
- * TODO: document this type.
- *
- * @author Vítor E. Silva Souza (vitorsouza@gmail.com)
- * @version 1.0
- */
+
 @Local
 public interface PlaceDAO extends BaseDAO<Place> {
 	/**
